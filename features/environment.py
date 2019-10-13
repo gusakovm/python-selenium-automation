@@ -1,14 +1,20 @@
 from selenium import webdriver
-
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
 
 def browser_init(context):
     """
     :param context: Behave context
     """
-    context.driver = webdriver.Chrome()
+    # Init driver
+    options = Options()
+    options.add_argument("--window-size=1024,800")
+
+    context.driver = webdriver.Chrome(options=options)
     # context.browser = webdriver.Safari()
     # context.browser = webdriver.Firefox()
 
+    context.action = ActionChains(context.driver)
     # context.driver.maximize_window()
     context.driver.implicitly_wait(4)
 

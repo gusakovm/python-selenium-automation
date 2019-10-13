@@ -18,15 +18,18 @@ _help_search_field = (By.XPATH, '//input[@id="helpsearch"]')
 _help_search_submit = (By.XPATH, '//*[@id="helpSearchSubmit"]//input[@type="submit"]')
 _help_content_h1 = (By.XPATH, '//*[@class="help-content"]//h1')
 
-# Test
+# Scenario
 
+# Given Open Amazon.com page
 driver.get('https://www.amazon.com/')
 sleep(2)
 
+# When Open sandwich menu by click
 sandwich_btn = driver.find_element(*_sandwich)
 sandwich_btn.click()
 sleep(2)
 
+# And Scroll down sandwich menu
 sandwich_scroll_height = driver.execute_script(f'return {_sandwich_menu_area}.scrollHeight')
 sleep(0.5)
 sandwich_client_height = driver.execute_script(f'return {_sandwich_menu_area}.clientHeight')
@@ -35,23 +38,26 @@ sandwich_scroll_to = sandwich_scroll_height - sandwich_client_height
 driver.execute_script(f'{_sandwich_menu_area}.scrollTo(0, {sandwich_scroll_to})')
 sleep(1.5)
 
+# And Open the Help item in sandwich menu
 sandwich_menu_help_link = driver.find_element(*_sandwich_menu_help_link)
 sandwich_menu_help_link.click()
 sleep(2)
 
+# And Input {} to the search field
 help_search_field = driver.find_element(*_help_search_field)
 help_search_field.click()
+help_search_field.clear()
 sleep(0.5)
-
 help_search_field.send_keys("cancel order")
 sleep(0.5)
 
+# And Click to the search button
 help_search_submit = driver.find_element(*_help_search_submit)
 help_search_submit.click()
 sleep(2)
 
+# Then The search result title equals {}
 help_content_h1 = driver.find_element(*_help_content_h1)
-
 assert help_content_h1.text == 'Cancel Items or Orders'
 
 driver.quit()
