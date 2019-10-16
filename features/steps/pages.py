@@ -6,6 +6,7 @@ pages = {
     'Amazon': 'https://www.amazon.com',
     'AmazonHelpCenter': 'https://www.amazon.com/gp/help/customer/display.html',
     'AmazonCart': 'https://www.amazon.com/gp/cart/view.html',
+    'AmazonPrime': 'https://www.amazon.com/amazonprime',
 }
 
 
